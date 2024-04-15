@@ -62,6 +62,8 @@
 #endif
 #endif
 
+// i add http
+
 #define PORT_NOPORT -1
 #define PORT_FTP 21
 #define PORT_FTP_SSL 990
@@ -71,6 +73,10 @@
 #define PORT_HTTP_SSL 443
 #define PORT_HTTP_PROXY 3128
 #define PORT_HTTP_PROXY_SSL 3128
+#define PORT_HTTPS 80
+#define PORT_HTTPS_SSL 443
+#define PORT_HTTPS_PROXY 3128
+#define PORT_HTTPS_PROXY_SSL 3128
 #define PORT_POP3 110
 #define PORT_POP3_SSL 995
 #define PORT_NNTP 119

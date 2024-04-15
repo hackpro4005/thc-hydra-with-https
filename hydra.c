@@ -46,9 +46,13 @@ void usage_smb(const char *service);
 void usage_http_form(const char *service);
 void usage_http_proxy(const char *service);
 void usage_http_proxy_urlenum(const char *service);
+void usage_https_form(const char *service);
+void usage_https_proxy(const char *service);
+void usage_https_proxy_urlenum(const char *service);
 void usage_snmp(const char *service);
 void usage_http(const char *service);
 void usage_smb2(const char *service);
+void usage_https(const char *service);
 
 extern void service_asterisk(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_telnet(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
@@ -75,6 +79,11 @@ extern void service_http_get(char *ip, int32_t sp, unsigned char options, char *
 extern void service_http_post(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_http_get_form(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_http_post_form(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_head(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_get(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_post(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_get_form(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_post_form(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_icq(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_pcnfs(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_mssql(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
@@ -86,10 +95,12 @@ extern void service_smtp_enum(char *ip, int32_t sp, unsigned char options, char 
 extern void service_teamspeak(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_pcanywhere(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_http_proxy(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_proxy(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_xmpp(char *target, char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_irc(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_redis(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_http_proxy_urlenum(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern void service_https_proxy_urlenum(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_s7_300(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_rtsp(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern void service_rpcap(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
@@ -172,8 +183,10 @@ extern int32_t service_cisco_enable_init(char *ip, int32_t sp, unsigned char opt
 extern int32_t service_cvs_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_smtp_enum_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_http_form_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern int32_t service_https_form_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_ftp_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_http_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
+extern int32_t service_https_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_icq_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_imap_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
 extern int32_t service_irc_init(char *ip, int32_t sp, unsigned char options, char *miscptr, FILE *fp, int32_t port, char *hostname);
@@ -210,7 +223,7 @@ char *SERVICES = "adam6500 asterisk afp cisco cisco-enable cobaltstrike cvs fire
                  "memcached mongodb mssql mysql ncp nntp oracle oracle-listener oracle-sid "
                  "pcanywhere pcnfs pop3[s] postgres radmin2 rdp redis rexec rlogin rpcap "
                  "rsh rtsp s7-300 sapr3 sip smb smb2 smtp[s] smtp-enum snmp socks5 ssh "
-                 "sshkey svn teamspeak telnet[s] vmauthd vnc xmpp";
+                 "sshkey svn teamspeak telnet[s] vmauthd vnc xmpp + https modules added";
 
 #define MAXBUF 520
 #define MAXLINESIZE ((MAXBUF / 2) - 4)
@@ -227,13 +240,11 @@ char *SERVICES = "adam6500 asterisk afp cisco cisco-enable cobaltstrike cvs fire
 
 #define RESTOREFILE "./hydra.restore"
 
-#define PROGRAM "Hydra"
-#define VERSION "v9.6dev"
-#define AUTHOR "van Hauser/THC"
-#define EMAIL "<vh@thc.org>"
-#define AUTHOR2 "David Maciejak"
-#define EMAIL2 "<david.maciejak@gmail.com>"
-#define RESOURCE "https://github.com/vanhauser-thc/thc-hydra"
+#define PROGRAM "Hydra with http"
+#define VERSION "v1dev"
+#define AUTHOR "hackpro4005"
+#define EMAIL "<hackerprototype4005>"
+#define RESOURCE "https://github.com/hackpro4005/thc-hydra-with-https/blob/master/hydra.h"
 
 extern char *hydra_strcasestr(const char *haystack, const char *needle);
 extern void hydra_tobase64(unsigned char *buf, int32_t buflen, int32_t bufsize);
@@ -397,8 +408,8 @@ static const struct {
                 {"https-form", service_https_form_init, NULL, usage_https_form},
                 {"https-post", service_https_init, service_https_post, usage_https},
                 {"https-post-form", service_https_form_init, service_https_post_form, usage_https_form},
-                 SERVICE3("https-proxy", http_proxy),
-                SERVICE3("http-proxys-urlenum", http_proxy_urlenum),
+                 SERVICE3("https-proxy", https_proxy),
+                SERVICE3("https-proxys-urlenum", https_proxy_urlenum),
                 SERVICE3("http-proxy", http_proxy),
                 SERVICE3("http-proxy-urlenum", http_proxy_urlenum),
                 SERVICE(icq),
@@ -1342,7 +1353,9 @@ int32_t hydra_lookup_port(char *service) {
                                       {"https-head", PORT_HTTP, PORT_HTTP_SSL},
                                       {"https-get", PORT_HTTP, PORT_HTTP_SSL},
                                       {"http-proxy", PORT_HTTP_PROXY, PORT_HTTP_PROXY_SSL},
-                                      {"http-proxy-urlenum", PORT_HTTP_PROXY, PORT_HTTP_PROXY_SSL},
+                                      {"http-proxy-urlenum", PORT_HTTP_PROXY, PORT_HTTP_PROXY_SSL},   
+                                      {"https-proxy", PORT_HTTPS_PROXY, PORT_HTTPS_PROXY_SSL},
+                                      {"https-proxy-urlenum", PORT_HTTPS_PROXY, PORT_HTTPS_PROXY_SSL},                                                                   
                                       {"icq", PORT_ICQ, PORT_ICQ_SSL},
                                       {"imap", PORT_IMAP, PORT_IMAP_SSL},
                                       {"ldap2", PORT_LDAP, PORT_LDAP_SSL},
