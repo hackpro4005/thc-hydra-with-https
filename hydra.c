@@ -390,6 +390,15 @@ static const struct {
                 {"http-form", service_http_form_init, NULL, usage_http_form},
                 {"http-post", service_http_init, service_http_post, usage_http},
                 {"http-post-form", service_http_form_init, service_http_post_form, usage_http_form},
+//https
+                 {"https-get", service_https_init, service_https_get, usage_https},
+                {"https-get-form", service_https_form_init, service_https_get_form, usage_https_form},
+                {"https-head", service_https_init, service_https_head, NULL},
+                {"https-form", service_https_form_init, NULL, usage_https_form},
+                {"https-post", service_https_init, service_https_post, usage_https},
+                {"https-post-form", service_https_form_init, service_https_post_form, usage_https_form},
+                 SERVICE3("https-proxy", http_proxy),
+                SERVICE3("http-proxys-urlenum", http_proxy_urlenum),
                 SERVICE3("http-proxy", http_proxy),
                 SERVICE3("http-proxy-urlenum", http_proxy_urlenum),
                 SERVICE(icq),
@@ -580,7 +589,8 @@ void help(int32_t ext) {
   PRINT_EXTEND(ext, "  hydra -L userlist.txt -p defaultpw imap://192.168.0.1/PLAIN\n"
                     "  hydra -C defaults.txt -6 pop3s://[2001:db8::1]:143/TLS:DIGEST-MD5\n"
                     "  hydra -l admin -p password ftp://[192.168.0.0/24]/\n"
-                    "  hydra -L logins.txt -P pws.txt -M targets.txt ssh\n");
+                    "  hydra -L logins.txt -P pws.txt -M targets.txt ssh
+                    " This is hydra with https by hackerprototype4005\n");
   exit(-1);
 }
 
